@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rimraf ./build && tsc --project tsconfig.json && tscpaths -p tsconfig.json -s ./src -o ./build",
-    "start": "npm run build && node build/index.js",
+    "start": "node build/index.js",
     "debug": "source src/config/token && ts-node-dev -r tsconfig-paths/register src/index.ts"
   },
   "repository": {
