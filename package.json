@@ -1,0 +1,41 @@
+{
+  "name": "discord-tiktok",
+  "version": "1.0.0",
+  "description": "replace tiktok links in discord with a video embed directly into discord",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "debug": "source src/config/token && ts-node-dev -r tsconfig-paths/register src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lynnau/discord-tiktok.git"
+  },
+  "keywords": [
+    "tiktok",
+    "discord",
+    "downloader",
+    "embed"
+  ],
+  "author": "lynnau",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lynnau/discord-tiktok/issues"
+  },
+  "homepage": "https://github.com/lynnau/discord-tiktok#readme",
+  "dependencies": {
+    "@typeit/discord": "^4.0.8",
+    "@types/node": "^14.14.20",
+    "discord.js": "^12.5.1",
+    "linkifyjs": "^2.1.9",
+    "node-fetch": "^2.6.1",
+    "tiktok-scraper": "^1.4.12"
+  },
+  "devDependencies": {
+    "@types/node-fetch": "^2.5.7",
+    "ts-node-dev": "^1.1.1",
+    "tsconfig-paths": "^3.9.0",
+    "tslib": "^2.1.0",
+    "typescript": "^4.1.3"
+  }
+}
