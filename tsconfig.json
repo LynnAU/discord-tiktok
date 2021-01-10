@@ -2,7 +2,8 @@
   "compilerOptions": {
     "baseUrl": "src",
     "paths": {
-      "@bot/*":["*"]
+      "core/*": ["*"],
+      "types/*": ["types/*"]
     },
     "module": "commonjs",
     "target": "es2017",
@@ -14,11 +15,13 @@
     "importHelpers": true,
     "forceConsistentCasingInFileNames": true,
     "lib": [
+      "es2020",
       "es2017",
       "esnext.asynciterable"
     ],
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "typeRoots": [ "./src/types/public", "./node_modules/@types"]
   },
-  "include": ["src/**/*.ts", "typings/**/*.d.ts"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "src/types/public"]
 }

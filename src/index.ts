@@ -1,6 +1,6 @@
 import { Client } from "@typeit/discord";
 
-import { config } from '@bot/config';
+import { config } from 'core/config';
 
 const discord = async() => {
   const client = new Client({
@@ -12,7 +12,12 @@ const discord = async() => {
     variablesChar: ":"
   });
 
-  await client.login(config.BOT_TOKEN);
+  try {
+    await client.login(config.BOT_TOKEN);
+  } catch(e) {
+    console.error(e);
+    process.exit(1);
+  }
 }
 
 discord();
