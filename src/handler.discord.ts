@@ -4,7 +4,7 @@ import {
   ArgsOf,
   Client
 } from '@typeit/discord';
-import { MessageAttachment } from 'discord.js';
+import { MessageAttachment, MessageEmbed } from 'discord.js';
 
 import { getVideoMeta } from 'tiktok-scraper';
 import fetch from 'node-fetch';
@@ -52,13 +52,13 @@ default class extends Object {
 
     // with a successful match, get the download url from the link
     const { collector } = meta;
-    const { videoUrl } = collector[0];
+    const { videoUrl, text } = collector[0];
 
     // download the url and get a buffer from it
     // then send it to discord as an attachment!
     const resp = await fetch(videoUrl, { headers: meta.headers });
     const buffer = await resp.buffer();
-    const attachment = new MessageAttachment(buffer, 'tiktok.webm');
-    message.channel.send('', attachment);
+    const attachment = new MessageAttachment(buffer, 'tiktok-clip.mp4');
+    message.channel.send(text, attachment);
   }
 }
