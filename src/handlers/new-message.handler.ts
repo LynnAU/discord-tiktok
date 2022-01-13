@@ -1,4 +1,4 @@
-import { Discord, On, ArgsOf, Client } from '@typeit/discord';
+import { Discord, On, ArgsOf } from '@typeit/discord';
 import { MessageAttachment } from 'discord.js';
 
 import { getVideoMeta, Result } from 'tiktok-scraper';
@@ -33,21 +33,41 @@ class NewMessageHandler extends Object {
         }
         debug('found url in the message');
 
-        const { value } = urls[0];
+        let { value: tiktokUrl }: { value: string } = urls[0];
+
+        // check if the url contains `vm.tiktok.com`
+        // if so, we need to do a special step
+        // so we can resolve the public tiktok link
+        // instead of the private, members only vm link
+        if (tiktokUrl.indexOf('vm.tiktok.com') > -1) {
+            debug('url is from vm.tiktok.com');
+            // send a request to the url, and see where we finally land
+            // then get the result's url, and feed that into the scraper
+            const resp = await fetch(tiktokUrl, {
+                headers: {
+                    'sec-ch-ua-platform': 'macOS',
+                    'sec-ch-ua-mobile': '?0',
+                    'sec-ch-ua': '" Not;A Brand";v="99", "Microsoft Edge";v="97", "Chromium";v="97"',
+                    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36 Edg/97.0.1072.55'
+                }
+            });
+            debug('finished request to vm.tiktok.com');
+            tiktokUrl = resp.url;
+        }
 
         let meta: Result;
         try {
             // fetch the meta of the url
             // setup proxy if applicable
-            const opts: { proxy?: string } = {};
+            const opts: { proxy?: string[] } = {};
 
             if (config.PROXY_URI && config.PROXY_URI !== '') {
-                opts.proxy = config.PROXY_URI;
+                opts.proxy = [config.PROXY_URI];
                 debug('using proxy for request');
             }
 
-            debug(`getting video metadata from url: ${value}`);
-            meta = await getVideoMeta(value, opts);
+            debug(`getting video metadata from url: ${tiktokUrl}`);
+            meta = await getVideoMeta(tiktokUrl, opts);
             if (meta.collector.length === 0) {
                 debug('got no metadata');
                 return;
@@ -71,3 +91,5 @@ class NewMessageHandler extends Object {
         debug(`sent message with id: ${reply.id}`);
     }
 }
+
+export { NewMessageHandler }
