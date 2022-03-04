@@ -31,13 +31,13 @@
   },
   "homepage": "https://github.com/lynnau/discord-tiktok#readme",
   "dependencies": {
+    "@jacksdevplayground/super-simple-tiktok-scraper": "^1.0.3",
     "@typeit/discord": "^4.0.10",
     "debug": "^4.3.3",
     "discord.js": "^12.5.1",
     "jsdom": "^19.0.0",
     "linkifyjs": "^2.1.9",
     "node-fetch": "^2.6.6",
-    "super-simple-tiktok-scraper": "github:JacksDevPlayground/super-simple-tiktok-scraper.git#v0.1",
     "tscpaths": "0.0.9",
     "tslib": "^2.3.1"
   },

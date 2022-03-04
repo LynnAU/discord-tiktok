@@ -3,7 +3,10 @@ import { MessageAttachment, Message } from 'discord.js';
 
 import fetch from 'node-fetch';
 import { debug } from 'core/config';
-import { getVideoMeta, Result } from 'super-simple-tiktok-scraper';
+import {
+  getVideoMeta,
+  Result,
+} from '@jacksdevplayground/super-simple-tiktok-scraper';
 
 const linkify = require('linkifyjs');
 
