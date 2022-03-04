@@ -6,8 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rimraf ./build && tsc --project tsconfig.json && tscpaths -p tsconfig.json -s ./src -o ./build",
-    "start": "node build/index.js",
-    "debug": "source src/config/token && DEBUG=discord-tiktok ts-node-dev -r tsconfig-paths/register src/index.ts"
+    "start": "DEBUG=discord-tiktok node --experimental-specifier-resolution=node build/index.js",
+    "debug": "source src/config/token && DEBUG=discord-tiktok ts-node-dev -r tsconfig-paths/register src/index.ts",
+    "cli:sign-url": "DEBUG=discord-tiktok ts-node-dev -r tsconfig-paths/register src/utils/cli-tiktok-sign.ts"
   },
   "repository": {
     "type": "git",
@@ -29,8 +30,10 @@
     "@typeit/discord": "^4.0.10",
     "debug": "^4.3.3",
     "discord.js": "^12.5.1",
+    "jsdom": "^19.0.0",
     "linkifyjs": "^2.1.9",
     "node-fetch": "^2.6.6",
+    "super-simple-tiktok-scraper": "git+https://github.com/JacksDevPlayground/super-simple-tiktok-scraper.git#v0.1",
     "tiktok-scraper": "^1.4.36",
     "tscpaths": "0.0.9",
     "tslib": "^2.3.1"
