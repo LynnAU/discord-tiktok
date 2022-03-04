@@ -3,6 +3,9 @@
   "version": "1.0.1",
   "description": "replace tiktok links in discord with a video embed directly into discord",
   "main": "index.ts",
+  "engines": {
+    "node": "16.13.1"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rimraf ./build && tsc --project tsconfig.json && tscpaths -p tsconfig.json -s ./src -o ./build",
